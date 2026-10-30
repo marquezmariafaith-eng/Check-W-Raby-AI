@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100608">
+  <title>Check W Raby | AI Answer Verification</title>
+  <link rel="icon" type="image/png" href="logo (2).png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- INTRO / LOADING SCREEN -->
+  <section id="introScreen" class="intro-screen">
+    <div class="intro-content">
+      <div class="intro-orbit"></div>
+      <img src="logo (2).png" alt="Check W Raby verification cat"
+           class="intro-cat" id="introCat">
+      <h1>Check <span>W Raby</span></h1>
+      <p>Your AI Answer Verification Assistant</p>
+      <div class="loading-track">
+        <div class="loading-progress"></div>
+      </div>
+      <small>Preparing your verification workspace...</small>
+    </div>
+  </section>
+
+  <!-- MAIN APPLICATION -->
+  <main id="app" class="app hidden">
+
+    
+<!-- ACCOUNT AUTHENTICATION -->
+<section id="auth-section" class="auth-section">
+  <div class="auth-card">
+    <div class="auth-heading">
+      <span class="auth-icon" role="img" aria-label="Black cat">🐈‍⬛</span>
+      <h2>Welcome to Raby AI</h2>
+      <p>Sign in or create an account to save your verification history.</p>
+    </div>
+
+    <div id="auth-forms">
+      <!-- LOGIN -->
+      <form id="auth-login-form">
+        <h3>Log in</h3>
+
+        <label for="login-email">Email address</label>
+        <input
+          type="email"
+          id="login-email"
+          placeholder="Enter your email"
+          required
+        >
+
+        <label for="login-password">Password</label>
+        <input
+          type="password"
+          id="login-password"
+          placeholder="Enter your password"
+          required
+        >
+
+        <button type="submit" class="primary-button">
+          Log in
+        </button>
+      </form>
+
+      
+<button type="button" id="google-login-button" class="google-button">
+  <span class="google-letter">G</span>
+  Continue with Google
+</button>
+
+
+      <div class="auth-divider">OR</div>
+
+      <!-- REGISTRATION -->
+      <form id="auth-register-form">
+        <h3>Create an account</h3>
+
+        <label for="register-email">Email address</label>
+        <input
+          type="email"
+          id="register-email"
+          placeholder="Enter your email"
+          required
+        >
+
+        <label for="register-password">Password</label>
+        <input
+          type="password"
+          id="register-password"
+          placeholder="Create a password (at least 8 characters)"
+          minlength="8"
+          required
+        >
+
+        <button type="submit" class="secondary-button">
+          Create account
+        </button>
+      </form>
+    </div>
+
+    <p id="auth-message" class="auth-message" role="status"></p>
+
+    <!-- SIGNED-IN ACCOUNT -->
+    <div id="account-panel" hidden>
+      <h3>You're signed in!</h3>
+      <p id="account-email"></p>
+      <p id="account-role"></p>
+      <button id="logout-button" class="secondary-button" type="button">
+        Log out
+      </button>
+    </div>
+  </div>
+</section>
+
+<header class="topbar" hidden>
+  <div class="brand">
+    <img src="logo (2).png" alt="Raby cat logo">
+    <div>
+      <h1>Check <span>W Veyra</span></h1>
+      <p>AI ANSWER VERIFICATION ASSISTANT</p>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <span class="system-status">
+      <span class="status-dot"></span> Workspace ready
+    </span>
+
+    <button class="outline-btn" id="historyBtn">
+      History
+    </button>
+
+    <button class="gold-btn" id="newSessionBtn">
+      + New Session
+    </button>
+
+    <!-- USER PROFILE MENU -->
+    <div class="profile-menu" id="profileMenu">
+
+      <button class="profile-trigger" id="profileTrigger"
+              type="button" aria-expanded="false">
+        <span class="profile-avatar" id="profileAvatar">U</span>
+        <span class="profile-chevron">⌄</span>
+      </button>
+
+      <div class="profile-dropdown hidden" id="profileDropdown">
+
+        <div class="profile-dropdown-heading">
+          <strong id="menu-user-email">User Account</strong>
+          <small id="menu-user-role">Member</small>
+        </div>
+
+        <button type="button" id="view-profile-btn">
+          <span>👤</span> View Profile
+        </button>
+
+        <button type="button" id="membership-btn">
+          <span>👑</span> Purchase Membership
+        </button>
+
+        <div class="dropdown-divider"></div>
+
+        <button type="button" id="menu-logout-btn"
+                class="logout-menu-button">
+          <span>↪</span> Log Out
+        </button>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- USER PROFILE OVERVIEW -->
+<section id="profile-overview" class="profile-overview hidden">
+
+  <div class="profile-page-heading">
+    <button type="button" id="back-to-workspace" class="outline-btn">
+      ← Back to Workspace
+    </button>
+    <h2>My Profile</h2>
+    <p>Your Veyra AI account and verification activity.</p>
+  </div>
+
+  <div class="profile-information">
+    <div class="profile-large-avatar" id="profileLargeAvatar">U</div>
+    <div>
+      <h3 id="profile-name">My Account</h3>
+      <p id="profile-email">Loading email...</p>
+      <span id="profile-member-role">Member</span>
+    </div>
+  </div>
+
+  <div class="profile-stat-grid">
+
+    <article class="profile-stat-card">
+      <span>Total Searches</span>
+      <strong id="profile-search-count">0</strong>
+    </article>
+
+    <article class="profile-stat-card">
+      <span>Saved Sessions</span>
+      <strong id="profile-session-count">0</strong>
+    </article>
+
+    <article class="profile-stat-card">
+      <span>Claims Reviewed</span>
+      <strong id="profile-claims-count">0</strong>
+    </article>
+
+    <article class="profile-stat-card">
+      <span>Verified Claims</span>
+      <strong id="profile-verified-count">0</strong>
+    </article>
+
+    <article class="profile-stat-card">
+      <span>Pending Claims</span>
+      <strong id="profile-pending-count">0</strong>
+    </article>
+
+    <article class="profile-stat-card">
+      <span>Conflicting Claims</span>
+      <strong id="profile-conflict-count">0</strong>
+    </article>
+
+  </div>
+
+  <div class="profile-account-details">
+    <h3>Account Information</h3>
+    <p>Email: <span id="profile-detail-email">-</span></p>
+    <p>Account created: <span id="profile-created-date">-</span></p>
+  </div>
+
+</section>
+
+    <section class="welcome-strip" hidden>
+      <div>
+        <span class="eyebrow">YOUR PERSONAL FACT-CHECKING COMPANION</span>
+        <h2>Don't just trust it. <span>Check it.</span></h2>
+        <p>Organize claims, discover sources, and document the evidence behind AI-generated information.</p>
+      </div>
+      <div class="welcome-cat">
+        <img src="logo (2).png" alt="Raby, your AI assistant">
+      </div>
+    </section>
+
+    <!-- SEARCH BAR ABOVE THE CLAIM WORKSPACE -->
+    <section class="search-section" hidden>
+      <div class="search-heading">
+        <div>
+          <h3>What would you like to investigate?</h3>
+          <p>Search a topic to get claim ideas and relevant source links.</p>
+        </div>
+        <span class="search-icon">⌕</span>
+      </div>
+
+      <form id="topicSearchForm" class="topic-search">
+        <input id="topicSearch" type="search"
+          placeholder="Try: corruption in the Philippines..."
+          autocomplete="off">
+        <button class="gold-btn" type="submit">Explore Topic ↗</button>
+      </form>
+
+      <div class="quick-searches">
+        <span>Try:</span>
+        <button type="button" class="topic-chip" data-topic="Philippine corruption">Corruption</button>
+        <button type="button" class="topic-chip" data-topic="Climate change">Climate change</button>
+        <button type="button" class="topic-chip" data-topic="Artificial intelligence">Artificial intelligence</button>
+        <button type="button" class="topic-chip" data-topic="Health misinformation">Health misinformation</button>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="dashboard" hidden>
+      <div class="stat-card">
+        <span class="stat-label">TOTAL CLAIMS</span>
+        <strong id="totalClaims">0</strong>
+        <small>Claims in this session</small>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">REVIEWED</span>
+        <strong id="reviewedClaims">0</strong>
+        <small>Sources selected for review</small>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">VERIFIED</span>
+        <strong id="verifiedClaims">0</strong>
+        <small>Recorded as supported</small>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">NEEDS ATTENTION</span>
+        <strong id="pendingClaims">0</strong>
+        <small>Pending or disputed claims</small>
+      </div>
+    </section>
+
+    <!-- THREE-COLUMN WORKSPACE -->
+    <section class="workspace" hidden>
+
+      <!-- LEFT: AI CHAT -->
+      <aside class="panel assistant-panel">
+        <div class="panel-heading">
+          <div class="assistant-profile">
+            <img src="logo (2).png" alt="Raby">
+            <div>
+              <h3>Raby AI</h3>
+              <span class="online-label">● Assistant</span>
+            </div>
+          </div>
+          <button class="icon-btn" id="clearChatBtn" title="Clear chat">↻</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages" aria-live="polite">
+          <div class="message assistant-message">
+            <img src="logo (2).png" alt="">
+            <div class="bubble">
+              <strong>Hi! I'm Raby. 🐈‍⬛</strong>
+              <p>I'll help you organize claims, discover possible sources, and track the evidence you review.</p>
+              <p>Start by searching a topic, pasting an AI answer, or asking me where to find reliable information.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-suggestions">
+          <span>QUICK PROMPTS</span>
+          <button type="button" class="prompt-btn"
+            data-prompt="Suggest claims about corruption in the Philippines.">
+            Suggest claims
+          </button>
+          <button type="button" class="prompt-btn"
+            data-prompt="Where can I find credible academic sources?">
+            Find credible sources
+          </button>
+          <button type="button" class="prompt-btn"
+            data-prompt="Explain how I should verify a claim.">
+            How to verify
+          </button>
+        </div>
+
+        <form id="chatForm" class="chat-input-area">
+          <input id="chatInput" type="text"
+            placeholder="Ask Raby for help..." autocomplete="off">
+          <button type="submit" aria-label="Send message">➤</button>
+        </form>
+        <p class="privacy-note">Review evidence carefully before trusting a claim.</p>
+      </aside>
+
+      <!-- CENTER: CLAIM WORKSPACE -->
+      <section class="panel claims-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">YOUR WORKSPACE</span>
+            <h3>Claim Verification</h3>
+            <p>Break information into checkable statements.</p>
+          </div>
+          <span class="workspace-badge">LIVE SESSION</span>
+        </div>
+
+        <div class="field-group">
+          <label for="answerInput">AI-GENERATED ANSWER / TEXT INPUT</label>
+          <textarea id="answerInput" rows="5"
+            placeholder="Paste an AI-generated answer here. Separate paragraphs or sentences into individual claims for review."></textarea>
+          <div class="field-actions">
+            <span>Keep claims specific and factual.</span>
+            <button type="button" class="text-btn" id="extractBtn">Organize into claims ↗</button>
+          </div>
+        </div>
+
+        <div class="add-claim-box">
+          <label for="claimInput">ADD AN INDIVIDUAL CLAIM</label>
+          <textarea id="claimInput" rows="3"
+            placeholder="Write one factual statement that you want to check..."></textarea>
+          <button type="button" class="gold-btn full-btn" id="addClaimBtn">
+            + Add Claim to Workspace
+          </button>
+        </div>
+
+        <div class="claims-toolbar">
+          <div>
+            <h3>Your Claims <span id="claimCountBadge">0</span></h3>
+            <p>Choose a claim to see suggested sources on the right.</p>
+          </div>
+          <select id="claimFilter" aria-label="Filter claims">
+            <option value="all">All claims</option>
+            <option value="pending">Pending</option>
+            <option value="verified">Verified</option>
+            <option value="unverified">Unverified</option>
+            <option value="disputed">Disputed</option>
+          </select>
+        </div>
+
+        <div id="claimsList" class="claims-list">
+          <div class="empty-state">
+            <span>✦</span>
+            <h3>Your workspace is waiting</h3>
+            <p>Search a topic or add your first claim to get started.</p>
+          </div>
+        </div>
+
+        <div class="workspace-footer">
+          <button type="button" class="outline-btn" id="exportBtn">Export Report</button>
+          <button type="button" class="outline-btn" id="saveBtn">Save Session</button>
+        </div>
+      </section>
+
+      <!-- RIGHT: SOURCE SUGGESTIONS -->
+      <aside class="panel sources-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">EVIDENCE DISCOVERY</span>
+            <h3>Source Suggestions</h3>
+            <p>Find references related to your selected claim.</p>
+          </div>
+          <span class="source-count">03</span>
+        </div>
+
+        <div id="selectedClaimBox" class="selected-claim-box">
+          <span>SELECTED CLAIM</span>
+          <p id="selectedClaimText">Choose a claim from your workspace to find relevant sources.</p>
+        </div>
+
+        <div id="sourceList" class="source-list">
+          <div class="source-placeholder">
+            <span>⌕</span>
+            <p>Your three suggested source links will appear here.</p>
+          </div>
+        </div>
+
+        <div class="source-guidance">
+          <span class="guidance-icon">ⓘ</span>
+          <p><strong>Remember</strong><br>
+          A source link is not proof by itself. Check its author, publication date, evidence, and whether it directly supports the claim.</p>
+        </div>
+
+        <div class="reference-notes">
+          <label for="sourceNotes">REVIEW NOTES</label>
+          <textarea id="sourceNotes" rows="3"
+            placeholder="Record what the source says and how it relates to your claim..."></textarea>
+          <button type="button" class="outline-btn full-btn" id="saveNotesBtn">
+            Save Notes
+          </button>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="app-footer" hidden>
+      <span>CHECK W RABY</span>
+      <span>Responsible AI use starts with evidence.</span>
+      <span>Verification is an assessment, not a guarantee of truth.</span>
+    </footer>
+  </main>
+
+  <!-- HISTORY MODAL -->
+  <div id="historyModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-heading">
+        <div>
+          <span class="eyebrow">YOUR RECORDS</span>
+          <h2>Verification History</h2>
+        </div>
+        <button id="closeHistoryBtn" class="icon-btn" aria-label="Close history">✕</button>
+      </div>
+      <div id="historyList"></div>
+      <button class="outline-btn full-btn" id="closeHistoryBottom">Close</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <!-- Supabase library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Veyra AI authentication -->
+<script src="auth.js"></script>
+
+<!-- Main website functionality -->
+<script src="script.js"></script>
+</body>
+</html>
